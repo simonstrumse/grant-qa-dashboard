@@ -1,4 +1,4 @@
-import { getSupabaseClient } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import type { Organization } from '@/lib/supabase'
 import { OrganizationsTable } from '@/components/OrganizationsTable'
 import { Pagination } from '@/components/Pagination'
@@ -12,7 +12,6 @@ interface SearchParams {
 }
 
 async function getOrganizations(searchParams: SearchParams) {
-  const supabase = getSupabaseClient()
 
   const page = parseInt(searchParams.page || '1')
   const pageSize = parseInt(searchParams.pageSize || '25')

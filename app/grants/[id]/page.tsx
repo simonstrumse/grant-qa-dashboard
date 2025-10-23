@@ -1,9 +1,8 @@
-import { getSupabaseClient } from '@/lib/supabase'
+import { supabase } from '@/lib/supabase'
 import type { Grant, Organization } from '@/lib/supabase'
 import Link from 'next/link'
 
 async function getGrant(id: string) {
-  const supabase = getSupabaseClient()
 
   const { data: grant } = await supabase
     .from('grants')
