@@ -1,7 +1,9 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import Link from 'next/link'
 
 async function getDuplicateCandidates() {
+  const supabase = getSupabaseClient()
+
   const { data: duplicates } = await supabase
     .from('duplicate_candidates')
     .select('*')
@@ -12,6 +14,8 @@ async function getDuplicateCandidates() {
 }
 
 async function getOrganizations() {
+  const supabase = getSupabaseClient()
+
   const { data } = await supabase
     .from('organizations')
     .select('canonical_name, full_name')

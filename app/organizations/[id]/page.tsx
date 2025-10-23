@@ -1,10 +1,12 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import type { Organization, Grant, Source } from '@/lib/supabase'
 import Link from 'next/link'
 import { CircularProgress } from '@/components/ProgressBar'
 import { Badge, CompletenessScore } from '@/components/Badge'
 
 async function getOrganization(id: string) {
+  const supabase = getSupabaseClient()
+
   const { data: org } = await supabase
     .from('organizations')
     .select('*')

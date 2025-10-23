@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import { GrantsTable } from '@/components/GrantsTable'
 import { Pagination } from '@/components/Pagination'
 
@@ -13,6 +13,8 @@ interface SearchParams {
 }
 
 async function getGrants(searchParams: SearchParams) {
+  const supabase = getSupabaseClient()
+
   const page = parseInt(searchParams.page || '1')
   const pageSize = parseInt(searchParams.pageSize || '25')
   const offset = (page - 1) * pageSize
