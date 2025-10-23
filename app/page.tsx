@@ -88,7 +88,7 @@ export default async function Dashboard() {
           href="/duplicates"
           icon="🔍"
           description="Potential duplicates awaiting review"
-          variant="info"
+          variant="default"
         />
       </div>
 
