@@ -51,6 +51,27 @@ npm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Deployment
+
+This project is configured for deployment on Vercel with automatic deployments from the `main` branch.
+
+### Environment Variables
+
+The following environment variables are required:
+
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous API key
+
+These are automatically set in the Vercel project and will be used for all deployments.
+
+### Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/simonstrumse/grant-qa-dashboard)
+
+Or manually:
+1. Push to the `main` branch to trigger automatic deployment
+2. View deployment status at https://vercel.com/simonstrumses-projects/grant-qa-dashboard
+
 ## Usage Guide
 
 ### Dashboard Home
