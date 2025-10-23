@@ -97,11 +97,23 @@ export function GrantsTable({ grants, currentSort, currentOrder }: GrantsTablePr
                 {renderSortIndicator('grant_name')}
               </div>
             </th>
-            <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Award Amount
+            <th
+              className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort('award_amount')}
+            >
+              <div className="flex items-center justify-end">
+                Award Amount
+                {renderSortIndicator('award_amount')}
+              </div>
             </th>
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Deadline
+            <th
+              className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort('application_deadline')}
+            >
+              <div className="flex items-center justify-center">
+                Deadline
+                {renderSortIndicator('application_deadline')}
+              </div>
             </th>
             <th
               className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
@@ -112,8 +124,14 @@ export function GrantsTable({ grants, currentSort, currentOrder }: GrantsTablePr
                 {renderSortIndicator('completeness_score')}
               </div>
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Fields
+            <th
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+              onClick={() => handleSort('fields_count')}
+            >
+              <div className="flex items-center">
+                Fields
+                {renderSortIndicator('fields_count')}
+              </div>
             </th>
           </tr>
         </thead>
