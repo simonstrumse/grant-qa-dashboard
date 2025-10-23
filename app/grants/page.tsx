@@ -45,8 +45,41 @@ async function getGrants(searchParams: SearchParams) {
   // Sorting
   const sortField = searchParams.sort || 'completeness_score'
   const sortOrder = searchParams.order || 'desc'
+  const ascending = sortOrder === 'asc'
 
-  query = query.order(sortField, { ascending: sortOrder === 'asc' })
+  // Handle special sorting cases for parsed/computed fields
+  // Note: JSONB sorting may not be perfect for complex types, but it will group similar values
+  switch (sortField) {
+    case 'award_amount':
+      // Sort by the amount extracted from JSONB
+      // Format: (award_amount_parsed->>'amount')::numeric
+      // This extracts the amount field as text and casts to numeric for proper sorting
+      try {
+        // Use raw PostgREST syntax for JSONB path with casting
+        const amountField = '(award_amount_parsed->>\'amount\')::numeric'
+        query = query.order(amountField as any, { ascending, nullsFirst: false })
+      } catch {
+        // Fallback to JSONB field sorting if the above doesn't work
+        query = query.order('award_amount_parsed', { ascending, nullsFirst: false })
+      }
+      break
+
+    case 'application_deadline':
+      // Sort by the deadline - use the raw text field which should be in ISO format
+      query = query.order('application_deadline', { ascending, nullsFirst: false })
+      break
+
+    case 'fields_count':
+      // Sort by completeness score as a proxy for field count
+      // More complete grants generally have more fields
+      query = query.order('completeness_score', { ascending })
+      break
+
+    default:
+      // Standard field sorting (grant_name, completeness_score, etc.)
+      query = query.order(sortField, { ascending })
+      break
+  }
 
   // Pagination
   query = query.range(offset, offset + pageSize - 1)
