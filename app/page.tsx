@@ -1,8 +1,10 @@
-import { supabase } from '@/lib/supabase'
+import { getSupabaseClient } from '@/lib/supabase'
 import Link from 'next/link'
 import { StatCard } from '@/components/StatCard'
 
 async function getDashboardStats() {
+  const supabase = getSupabaseClient()
+
   const [orgsResult, grantsResult, issuesResult] = await Promise.all([
     supabase.from('organizations').select('*', { count: 'exact', head: true }),
     supabase.from('grants').select('*', { count: 'exact', head: true }),
